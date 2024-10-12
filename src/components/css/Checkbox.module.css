@@ -1,0 +1,4 @@
+.checkboxInput:checked + .checkboxChecker {
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+}
