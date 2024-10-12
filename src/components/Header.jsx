@@ -1,5 +1,6 @@
 import { useState } from "react"
 
+import { IconButton } from "./IconButton"
 import { Sun, Moon } from "react-feather"
 
 function ColorSwitch() {
@@ -12,9 +13,9 @@ function ColorSwitch() {
   }
 
   return (
-    <button onClick={toggleColorMode}>
+    <IconButton className="rounded-full" onClick={toggleColorMode}>
       {colorMode === "dark" ? <Sun /> : <Moon />}
-    </button>
+    </IconButton>
   )
 }
 
@@ -23,7 +24,7 @@ export function Header() {
     <header className=" p-4 bg-zinc-800">
       <div className="flex justify-between items-center max-w-5xl m-auto">  {/* flex-wrapper */}
         <p>logo</p>
-        <div>
+        <div className="h-fit">
           <ColorSwitch />
         </div>
       </div>
