@@ -10,10 +10,7 @@
   box-sizing: border-box;
 
   font-family: "Figtree", serif;
-}
-
-.dark * {
-  color: white;
+  color: white; 
 }
 
 
