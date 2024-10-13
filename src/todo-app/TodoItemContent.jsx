@@ -18,7 +18,7 @@ export function TodoItemContent({ isEditing, isExpanded, todoId, todoText, todoD
 
         { (todoDescription || todoHasDate) && <hr className="border-2 border-zinc-600 mt-3" />}
         { (todoHasDescription) && <p className="mt-3 text-zinc-300">{todoDescription}</p> }
-        { todoHasDate && <p className="flex items-center gap-3 mt-3"><Calendar size={20} /> {todoDate}</p> }
+        { todoHasDate && <p className="flex items-center gap-3 mt-3"><Calendar size={20} /> {todoDate.split("-").reverse().join("/")}</p> }
       </div>
     )
   }

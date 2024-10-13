@@ -41,7 +41,7 @@ export function TodoForm({ addTodoDispatcher }) {
           <IconButton type="button" onClick={handleToggleDescription} aria-label="exibir campo de descrição" title="exibir campo de descrição" className="rounded-full"><ChevronDown size={20} className={moreDetailtsAreVisible ? "rotate-180" : ""} /></IconButton>
 
           <IconButton type="submit" aria-label="criar tarefa" title="criar tarefa" className="rounded rounded-br-lg max-430:hidden"><CornerDownLeft size={28}  /></IconButton>
-          <IconButton type="submit" aria-label="criar tarefa" title="criar tarefa" className="rounded hidden max-430:block"><CornerDownLeft size={20}  /></IconButton>
+          <IconButton type="submit" aria-label="criar tarefa" title="criar tarefa" className="rounded rounded-br-lg hidden max-430:block"><CornerDownLeft size={20}  /></IconButton>
         </div>
 
         { 
