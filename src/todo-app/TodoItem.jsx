@@ -39,15 +39,15 @@ export function TodoItem({ todoId, todoText, todoDescription, checked, deleteTod
   }
 
   return (
-    <li className="flex gap-5 px-3 py-2.5 items-start box-content bg-zinc-700">
-      <label className="flex gap-5 min-h-[36px] w-full items-start" aria-label="marcar ou dermarcar tarefa">
-        <Checkbox checked={checked} onChange={() => checkTodoDispatcher(todoId)} className="translate-y-[8px]" />
+    <li className="flex gap-5 px-3 py-2.5 items-start box-content bg-zinc-700 max-520:gap-3 max-520:py-2">
+      <label className="flex gap-5 min-h-[36px] w-full items-center max-520:gap-3" aria-label="marcar ou dermarcar tarefa">
+        <Checkbox checked={checked} onChange={() => checkTodoDispatcher(todoId)} />
 
         <TodoItemContent isEditing={isEditing} isExpanded={isExpanded} todoId={todoId} todoText={todoText} todoDescription={todoDescription} checked={checked} onSubmit={handleEditTodo} />
         
-        { (todoHasDescription && !isEditing) && <IconButton onClick={toggleIsExpanded} sm aria-label="expandir tarefa" title="expandir tarefa" className={`rounded-md translate-y-[4px] ${isExpanded ? "rotate-180" : ""}`}>
+        <IconButton onClick={toggleIsExpanded} sm aria-label="expandir tarefa" title="expandir tarefa" className={`rounded-md ${isExpanded ? "rotate-180" : ""}`}>
           <ChevronDown size={20}/>
-        </IconButton> }
+        </IconButton>
       </label>
 
       <div className="tools flex items-center gap-3">

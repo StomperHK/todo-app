@@ -5,7 +5,9 @@ export default {
   theme: {
     extend: {
       screens: {
-        "max-1280": {"max": "1280px"}
+        "max-1280": {"max": "1280px"},
+        "max-520": {"max": "520px"},
+        "max-430": {"max": "430px"}
       },
       spacing: {
         "1.5": "0.375rem",

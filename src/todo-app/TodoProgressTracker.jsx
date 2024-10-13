@@ -25,7 +25,7 @@ export function TodoProgressTracker({ todos }) {
   const thereAreNoTodos = todos.length === 0
 
   return (
-    <aside className="w-[240px] mb-4 p-4 border-2 border-zinc-500 absolute top-0 left-0 -translate-x-[110%] rounded-md bg-zinc-800 shadow-normal max-1280:w-full max-1280:static max-1280:-translate-x-0">
+    <aside className="w-[240px] mb-4 p-4 border-2 border-zinc-500 absolute top-0 left-0 -translate-x-[110%] rounded-md bg-zinc-800 shadow-normal max-1280:w-[90svw] max-1280:static max-1280:-translate-x-0">
       <h2 className="mb-2 text-3xl">Progresso</h2>
 
       {
