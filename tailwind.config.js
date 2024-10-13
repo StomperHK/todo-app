@@ -6,6 +6,7 @@ export default {
     extend: {
       screens: {
         "max-1280": {"max": "1280px"},
+        "max-580": {"max": "580px"},
         "max-520": {"max": "520px"},
         "max-430": {"max": "430px"}
       },

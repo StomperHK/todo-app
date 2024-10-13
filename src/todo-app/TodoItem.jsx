@@ -6,11 +6,13 @@ import { TodoItemContent } from "./TodoItemContent";
 import { Trash2, Edit2, X, ChevronDown } from 'react-feather';
 
 
-export function TodoItem({ todoId, todoText, todoDescription, checked, deleteTodoDispatcher, editTodoDispatcher, checkTodoDispatcher }) {
+export function TodoItem({ todoId, todoText, todoDescription, todoDate, todoPriority, checked, deleteTodoDispatcher, editTodoDispatcher, checkTodoDispatcher }) {
   const [todoItemState, setTodoItemState] = useState("normal")    // avoid state paradox/contradiction, when multiple states control the same entity
 
   const isEditing = todoItemState === "editing"
   const isExpanded = todoItemState === "expanded"
+  const priorityTagColor = {alto: "bg-red-600", "médio": "bg-yellow-400", baixo: "bg-green-400"}[todoPriority]
+  
 
   function showEditForm() {
     setTodoItemState("editing")
@@ -30,16 +32,18 @@ export function TodoItem({ todoId, todoText, todoDescription, checked, deleteTod
     const formData = new FormData(event.target)
     const newTodoText = formData.get("new-todo-text-" + todoId)
     const newTodoDescription = formData.get("new-todo-description-" + todoId) || ""
+    const newTodoDate = formData.get("new-todo-date-" + todoId) || ""
+    const newTodoPriority = formData.get("new-todo-priority-" + todoId) || ""   
 
     if (newTodoText === "") return
 
-    editTodoDispatcher(todoId, newTodoText, newTodoDescription)
+    editTodoDispatcher(todoId, newTodoText, newTodoDescription, newTodoDate, newTodoPriority)
   }
 
 
   return (
     <li>
-      <div className="flex gap-5 px-3 py-2.5 items-center box-content bg-zinc-700 max-520:gap-3 max-520:py-2">
+      <div className="flex gap-5 px-3 py-2.5 pl-5 items-center box-content relative bg-zinc-700 max-520:gap-3 max-520:py-2">
         <label className="flex gap-5 min-h-[36px] w-full items-center max-520:gap-3" aria-label="marcar ou dermarcar tarefa">
           <Checkbox checked={checked} onChange={() => checkTodoDispatcher(todoId)} />
       
@@ -56,9 +60,15 @@ export function TodoItem({ todoId, todoText, todoDescription, checked, deleteTod
           </IconButton>
           <IconButton onClick={() => deleteTodoDispatcher(todoId)} className="rounded-md max-520:p-1.5" aria-label="remover tarefa" title="remover tarefa"><Trash2 size={20}/></IconButton>
         </div>
+
+        <div className={`priority-tag h-full w-2 absolute left-0 top-0 ${priorityTagColor}`}></div>
       </div>
 
-      <TodoItemContent isEditing={isEditing} isExpanded={isExpanded} todoId={todoId} todoText={todoText} todoDescription={todoDescription} checked={checked} onSubmit={handleEditTodo} />
+      <TodoItemContent 
+        isEditing={isEditing} isExpanded={isExpanded}
+        todoId={todoId} todoText={todoText} todoDescription={todoDescription} todoDate={todoDate} todoPriority={todoPriority} checked={checked}
+        onSubmit={handleEditTodo}
+      />
     </li>
   )
 }
