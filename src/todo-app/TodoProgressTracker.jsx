@@ -7,7 +7,7 @@ function TodosProgressBar({ todos }) {
   const completedTodosPercentage = `${completedTodos/todosAmount * 100}%`
 
   return (
-    <div className="flex items-center gap-2 mt-3" role="progressbar" aria-labe="tarefas concluídas" aria-valuenow="completedTodosPercentage">
+    <div className="flex items-center gap-2 mt-3" role="progressbar" aria-label="tarefas concluídas" aria-valuenow="completedTodosPercentage">
       <Activity />
 
       <div className="w-full h-1 bg-zinc-600 overflow-hidden relative">
@@ -25,7 +25,7 @@ export function TodoProgressTracker({ todos }) {
   const thereAreNoTodos = todos.length === 0
 
   return (
-    <aside className="w-[240px] mb-4 p-4 border-2 border-zinc-500 absolute top-0 left-0 -translate-x-[110%] rounded-md bg-zinc-800 shadow-normal max-1280:w-[90svw] max-1280:static max-1280:-translate-x-0">
+    <aside className="max-w-xl w-[240px] mb-4 p-4 border-2 border-zinc-500 absolute top-0 left-0 -translate-x-[110%] rounded-md bg-zinc-800 shadow-normal max-1280:w-[90svw] max-1280:static max-1280:-translate-x-0">
       <h2 className="mb-2 text-3xl">Progresso</h2>
 
       {
