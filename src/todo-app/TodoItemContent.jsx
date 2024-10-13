@@ -11,7 +11,7 @@ export function TodoItemContent({ isEditing, isExpanded, todoId, todoText, todoD
     !isEditing ?
     (
       <div className="self-center p-2 rounded w-full bg-zinc-800 bg-opacity-60">
-        <p className={` text-start select-none break-all line-clamp-1 ${checked ? "line-through" : ""}`}>{todoText}</p>
+        <p className={`text-start select-none break-all ${isExpanded ? "" : "line-clamp-1"} ${checked ? "line-through" : ""}`}>{todoText}</p>
         { (todoHasDescription && isExpanded) && <p className="mt-3 pt-3 border-t-2 border-zinc-600 text-zinc-300">{todoDescription}</p>}
       </div>
     ) :

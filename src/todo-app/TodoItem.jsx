@@ -45,7 +45,7 @@ export function TodoItem({ todoId, todoText, todoDescription, checked, deleteTod
 
         <TodoItemContent isEditing={isEditing} isExpanded={isExpanded} todoId={todoId} todoText={todoText} todoDescription={todoDescription} checked={checked} onSubmit={handleEditTodo} />
         
-        { (todoHasDescription && !isEditing) && <IconButton onClick={toggleIsExpanded} sm className={`rounded-md translate-y-[4px] ${isExpanded ? "rotate-180" : ""}`}>
+        { (todoHasDescription && !isEditing) && <IconButton onClick={toggleIsExpanded} sm aria-label="expandir tarefa" title="expandir tarefa" className={`rounded-md translate-y-[4px] ${isExpanded ? "rotate-180" : ""}`}>
           <ChevronDown size={20}/>
         </IconButton> }
       </label>
