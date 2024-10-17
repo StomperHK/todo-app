@@ -1,5 +1,5 @@
-import { Todo } from "./todo-app/Todo"
 import { Header } from "./components/Header"
+import { Todo } from "./todo-app/"
 
 
 function App() {
