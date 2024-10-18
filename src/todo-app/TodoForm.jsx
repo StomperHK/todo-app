@@ -28,8 +28,10 @@ export function TodoForm({ addTodoDispatcher }) {
     const todoPriority = todoFormData.get("todo-priority") || "baixo"
 
     if (!todoText) return
+
+    const todoDateAsMiliseconds = todoDate ? Date.parse(todoDate) : ""
     
-    addTodoDispatcher(todoId++, todoText, todoDescription, todoDate, todoPriority)
+    addTodoDispatcher(todoId++, todoText, todoDescription, todoDate, todoDateAsMiliseconds, todoPriority)
   }
 
   return (

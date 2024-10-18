@@ -13,12 +13,15 @@ export function Todo() {
 
   const { todoList } = styles
 
-  function addTodoDispatcher(todoId, todoText, todoDescription) {
+  function addTodoDispatcher(todoId, todoText, todoDescription, todoDate, todoDateAsMiliseconds, todoPriority) {
     dispatch({
       type: "add",
       todoId: todoId,
       todoText,
-      todoDescription
+      todoDescription,
+      todoDate,
+      todoDateAsMiliseconds,
+      todoPriority
     })
   }
 
@@ -29,12 +32,15 @@ export function Todo() {
     })
   }
 
-  function editTodoDispatcher(todoId, newTodoText, newTodoDescription) {
+  function editTodoDispatcher(todoId, newTodoText, newTodoDescription, newTodoDate, newTodoDateAsMiliseconds, newTodoPriority) {
     dispatch({
       type: "edit",
       todoId,
       newTodoText,
-      newTodoDescription
+      newTodoDescription,
+      newTodoDate,
+      newTodoDateAsMiliseconds,
+      newTodoPriority
     })
   }
 

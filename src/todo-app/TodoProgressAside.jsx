@@ -21,20 +21,20 @@ function TodosProgressBar({ todos }) {
   )
 }
 
-export function TodoProgressTracker({ todos }) {
+export function TodosProgressAside({ todos }) {
   const thereAreNoTodos = todos.length === 0
 
   return (
-    <aside className="max-w-xl w-[280px] mb-4 p-4 border-2 border-zinc-500 absolute top-0 left-0 -translate-x-[110%] rounded-md bg-zinc-800 shadow-normal max-1280:w-[90svw] max-1280:static max-1280:-translate-x-0">
-      <h2 className="mb-2 text-3xl">Progresso</h2>
+    <div className="mb-4 p-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
+      <h2 className="mb-2 text-2xl">Progresso</h2>
 
       {
         thereAreNoTodos ?
-        <p className="mt-3 text-zinc-300 max-1280:min-h-[28px]">
+        <p className="text-zinc-300">
           Crie tarefas para monitorar seu progresso.
         </p> :
         <TodosProgressBar todos={todos} />
       }
-    </aside>
+    </div>
   )
 }

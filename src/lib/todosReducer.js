@@ -1,9 +1,12 @@
 export function todosReducer(todos, action) {
   switch (action.type) {
     case "add":
-      var {todoId, todoText, todoDescription, todoDate, todoPriority} = action
+      var {todoId, todoText, todoDescription, todoDate, todoDateAsMiliseconds, todoPriority} = action
       
-      return [{todoId, todoText, todoDescription, checked: false, todoDate: todoDate, todoPriority: todoPriority}, ...todos]
+      return [
+        {todoId, todoText, todoDescription, checked: false, todoDate, todoDateAsMiliseconds, todoPriority},
+        ...todos
+      ]
 
     case "check":
       var {todoId} = action
@@ -11,12 +14,14 @@ export function todosReducer(todos, action) {
       return todos.map(todo => todo.todoId === todoId ?  {...todo, checked: !todo.checked} : todo)
 
     case "edit":
-      var {todoId, newTodoText, newTodoDescription, newTodoDate, newTodoPriority} = action
+      var {todoId, newTodoText, newTodoDescription, newTodoDate, newTodoDateAsMiliseconds, newTodoPriority} = action
 
       console.log(newTodoDate);
       
 
-      return todos.map(todo => todo.todoId === todoId ? {...todo, todoText: newTodoText, todoDescription: newTodoDescription, todoDate: newTodoDate, todoPriority: newTodoPriority} : todo)
+      return todos.map(todo => todo.todoId === todoId ? {
+        ...todo, todoText: newTodoText, todoDescription: newTodoDescription, todoDate: newTodoDate, todoDateAsMiliseconds: newTodoDateAsMiliseconds, todoPriority: newTodoPriority
+      } : todo)
 
 
     case "delete":

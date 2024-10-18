@@ -37,7 +37,9 @@ export function TodoItem({ todoId, todoText, todoDescription, todoDate, todoPrio
 
     if (newTodoText === "") return
 
-    editTodoDispatcher(todoId, newTodoText, newTodoDescription, newTodoDate, newTodoPriority)
+    const newTodoDateAsMiliseconds = newTodoDate ? Date.parse(newTodoDate) : ""
+
+    editTodoDispatcher(todoId, newTodoText, newTodoDescription, newTodoDate, newTodoDateAsMiliseconds, newTodoPriority)
   }
 
 
