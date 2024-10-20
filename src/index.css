@@ -21,6 +21,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  background-image: radial-gradient(circle farthest-side, #27272a, 40%, #09090b);
+  background-attachment: fixed;
+}
+
 button,
 input,
 select,
