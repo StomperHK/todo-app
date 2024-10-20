@@ -15,7 +15,7 @@ export function TodoItemContent({ isEditing, isExpanded, todoId, todoText, todoD
   if (isExpanded) {
     return (
       <div className="p-3 pl-5 w-full bg-zinc-700 bg-opacity-60">
-        <p className={`text-start select-none break-all`}>{todoText}</p>
+        <p className={`text-start break-all`}>{todoText}</p>
 
         { (todoDescription || todoHasDate) && <hr className="border-2 border-zinc-600 mt-3" />}
         { (todoHasDescription) && <p className="mt-3 text-zinc-300">{todoDescription}</p> }

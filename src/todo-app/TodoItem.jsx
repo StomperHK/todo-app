@@ -49,7 +49,7 @@ export function TodoItem({ todoId, todoText, todoDescription, todoDate, todoPrio
         <label className="flex gap-5 min-h-[36px] w-full items-center max-520:gap-3" aria-label="marcar ou dermarcar tarefa">
           <Checkbox checked={checked} onChange={() => checkTodoDispatcher(todoId)} />
       
-          <p className={`p-2 rounded w-full bg-zinc-800 bg-opacity-60 text-start select-none break-all line-clamp-1 ${checked ? "line-through" : ""} max-520:py-1`}>{todoText}</p>
+          <p className={`p-2 py-1.5 rounded w-full bg-zinc-800 bg-opacity-60 text-start select-none break-all line-clamp-1 ${checked ? "line-through" : ""} max-520:py-1`}>{todoText}</p>
       
           <IconButton onClick={toggleExpandItem} sm aria-label="expandir tarefa" title="expandir tarefa" className={`rounded-md ${isExpanded ? "rotate-180" : ""}`}>
             <ChevronDown size={20}/>
