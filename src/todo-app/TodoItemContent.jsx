@@ -3,6 +3,7 @@ import { Button } from "../components/Button";
 import { Check, Calendar } from "react-feather";
 
 import { getCurrentDate } from "../lib/getCurrentDate";
+import { formatDate } from "../lib/formatDate";
 
 
 export function TodoItemContent({ isEditing, isExpanded, todoId, todoText, todoDescription, todoDate, todoPriority,checked, onSubmit }) {
@@ -18,7 +19,7 @@ export function TodoItemContent({ isEditing, isExpanded, todoId, todoText, todoD
 
         { (todoDescription || todoHasDate) && <hr className="border-2 border-zinc-600 mt-3" />}
         { (todoHasDescription) && <p className="mt-3 text-zinc-300">{todoDescription}</p> }
-        { todoHasDate && <p className="flex items-center gap-3 mt-3"><Calendar size={20} /> {todoDate.split("-").reverse().join("/")}</p> }
+        { todoHasDate && <p className="flex items-center gap-3 mt-3"><Calendar size={20} /> {formatDate(todoDate)}</p> }
       </div>
     )
   }
@@ -33,7 +34,7 @@ export function TodoItemContent({ isEditing, isExpanded, todoId, todoText, todoD
           <div className="flex justify-around mt-3">
             <label>
               Alterar data:<br/>
-              <input type="date" name={"new-todo-date-" + todoId} min={inputMinimalDate} aria-label="definir a data" className="mt-2 bg-transparent border-2 border-zinc-500 p-1 rounded outline-none transition-colors duration-150 focus:border-zinc-300" />
+              <input type="date" defaultValue={todoDate} name={"new-todo-date-" + todoId} min={inputMinimalDate} aria-label="definir a data" className="mt-2 bg-transparent border-2 border-zinc-500 p-1 rounded outline-none transition-colors duration-150 focus:border-zinc-300" />
             </label>
 
             <label>

@@ -1,6 +1,9 @@
 import { useState } from "react";
 
-import { ChevronDown, Calendar } from "react-feather";
+import { ChevronDown } from "react-feather";
+
+import { formatDate } from "../lib/formatDate";
+
 
 import styles from "./css/TodosCloseToExpireAside.module.css"
 
@@ -8,7 +11,7 @@ function TodosCloseToExpireListItem({ todo: { todoText, todoDate } }) {
   const {closeToExpireItem} = styles
 
   return (
-      <li className={`${closeToExpireItem} bg-zinc-700 bg-opacity-65 p-1 line-clamp-1`}>{todoText} ({todoDate})</li>
+      <li className={`${closeToExpireItem} bg-zinc-700 bg-opacity-65 p-1 px-2 line-clamp-1`}>{formatDate(todoDate)} - {todoText} </li>
   )
 }
 
@@ -42,10 +45,12 @@ function TodosCloseToExpireList({ todos }) {
       {
         amountOfTodosCloseToExpire ? 
         <div>
-          <button onClick={toggleExpandTodos} className="flex justify-between items-center w-full p-2 rounded bg-zinc-900 text-start bg-opacity-50">{amountOfTodosCloseToExpire} tarefa(s) perto de vencer <ChevronDown size={20} className={isExpanded ? "rotate-180" : ""}/></button>
-          {isExpanded && <ul className="mt-3 rounded overflow-hidden"> {todosCloseToExpireDate.map(todo => <TodosCloseToExpireListItem key={todo.id} todo={todo}/>)} </ul>}
+          <button onClick={toggleExpandTodos} className={`${isExpanded ? "rounded-t" : "rounded"} flex shadow-normal justify-between items-center w-full p-1.5 px-2 border-2 border-zinc-600 bg-zinc-800 text-start bg-opacity-50`}>
+            {amountOfTodosCloseToExpire} tarefa(s) perto de vencer <ChevronDown size={20} className={isExpanded ? "rotate-180" : ""}/>
+          </button>
+          {isExpanded && <ul className="rounded-b overflow-hidden"> {todosCloseToExpireDate.map(todo => <TodosCloseToExpireListItem key={todo.id} todo={todo}/>)} </ul>}
         </div> :
-        <p className="text-zinc-300">Tudo em dia.</p>
+        <p className="text-zinc-300 mt-3">Tudo em dia.</p>
       }
     </>
   )
@@ -55,12 +60,12 @@ export function TodosCloseToExpireAside({ todos }) {
   const thereAreNoTodos = todos.length === 0
 
   return (  
-    <div className="mb-4 p-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
+    <div className="mb-4 min-h-[116px] p-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
       <h2 className="mb-2 text-2xl">Perto de Expirar</h2>
 
       {
         thereAreNoTodos ?
-        <p className="text-zinc-300">
+        <p className="text-zinc-300 mt-3">
           Crie tarefas para monitorar seus prazos.
         </p> :
         <TodosCloseToExpireList todos={todos} />
