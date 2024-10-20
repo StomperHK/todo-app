@@ -14,10 +14,7 @@ export function todosReducer(todos, action) {
       return todos.map(todo => todo.todoId === todoId ?  {...todo, checked: !todo.checked} : todo)
 
     case "edit":
-      var {todoId, newTodoText, newTodoDescription, newTodoDate, newTodoDateAsMiliseconds, newTodoPriority} = action
-
-      console.log(newTodoDate);
-      
+      var {todoId, newTodoText, newTodoDescription, newTodoDate, newTodoDateAsMiliseconds, newTodoPriority} = action      
 
       return todos.map(todo => todo.todoId === todoId ? {
         ...todo, todoText: newTodoText, todoDescription: newTodoDescription, todoDate: newTodoDate, todoDateAsMiliseconds: newTodoDateAsMiliseconds, todoPriority: newTodoPriority
@@ -28,5 +25,10 @@ export function todosReducer(todos, action) {
       var {todoId} = action
 
       return todos.filter(todo => todo.todoId !== todoId)
+
+    case "load-todos":
+      const {todosData} = action
+
+      return todosData
   }
 }
