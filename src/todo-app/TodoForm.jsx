@@ -22,7 +22,7 @@ export function TodoForm({ addTodoDispatcher }) {
     event.preventDefault()
 
     const todoFormData = new FormData(event.target)
-    const todoText = todoFormData.get("todo-name")
+    const todoText = todoFormData.get("todo-name").trim()
     const todoDescription = todoFormData.get("todo-description") || ""
     const todoDate = todoFormData.get("todo-date") || ""
     const todoPriority = todoFormData.get("todo-priority") || "baixo"
@@ -36,7 +36,7 @@ export function TodoForm({ addTodoDispatcher }) {
 
   return (
     <>
-      <form onSubmit={handleAddTodo} className="mb-5 p-3 rounded bg-zinc-900 bg-opacity-40">
+      <form onSubmit={handleAddTodo} className="mb-5 p-3 rounded bg-zinc-900 bg-opacity-50">
         <div className="flex items-center gap-3">
           <Input type="text" placeholder="título da tarefa" name="todo-name" className="grow" />
           
