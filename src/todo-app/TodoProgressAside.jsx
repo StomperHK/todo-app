@@ -25,7 +25,7 @@ export function TodosProgressAside({ todos }) {
   const thereAreNoTodos = todos.length === 0
 
   return (
-    <div className="mb-4 p-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
+    <div className="mb-4 p-4 min-h-[108px] border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
       <h2 className="mb-2 text-2xl">Progresso</h2>
 
       {
