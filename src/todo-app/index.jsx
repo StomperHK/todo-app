@@ -127,7 +127,7 @@ export function Todo() {
 
   return (
     <div className="min-h-[100svh] bg-peaks">   {/* backround wrapper */}
-      <h1 className="text-center uppercase my-5">Suas tarefas</h1>
+      <h1 className="text-center uppercase my-5 max-520:text-3xl">Suas tarefas</h1>
 
       <ModalContext.Provider value={showModal}>
         <div className="flex items-start gap-4 w-fit m-auto mt-10 mb-10 -translate-x-[160px] max-1280:block max-1280:translate-x-0">
