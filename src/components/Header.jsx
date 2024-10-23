@@ -14,7 +14,7 @@ function ColorSwitch() {
 
   return (
     <IconButton className="rounded-full" onClick={toggleColorMode}>
-      {colorMode === "dark" ? <Sun /> : <Moon />}
+      {colorMode === "dark" ? <Sun size={20} /> : <Moon size={20} />}
     </IconButton>
   )
 }
