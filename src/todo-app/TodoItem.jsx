@@ -1,13 +1,16 @@
-import { useState, useReducer } from "react";
+import { useState, useContext } from "react";
 
 import { IconButton } from "../components/IconButton";
 import { Checkbox } from "../components/Checkbox";
 import { TodoItemContent } from "./TodoItemContent";
 import { Trash2, Edit2, X, ChevronDown } from 'react-feather';
 
+import { ModalContext } from "../lib/modalContext";
+
 
 export function TodoItem({ todoId, todoText, todoDescription, todoDate, todoPriority, checked, deleteTodoDispatcher, editTodoDispatcher, checkTodoDispatcher }) {
   const [todoItemState, setTodoItemState] = useState("normal")    // avoid state paradox/contradiction, when multiple states control the same entity
+  const showModal = useContext(ModalContext)
 
   const isEditing = todoItemState === "editing"
   const isExpanded = todoItemState === "expanded"
@@ -60,13 +63,13 @@ export function TodoItem({ todoId, todoText, todoDescription, todoDate, todoPrio
           <IconButton onClick={!isEditing ? showEditForm : hideEditForm} className="rounded-md max-520:p-1.5" aria-label="editar tarefa" title="editar tarefa">
             { !isEditing ? <Edit2 size={20} /> : <X size={20} /> }
           </IconButton>
-          <IconButton onClick={() => deleteTodoDispatcher(todoId)} className="rounded-md max-520:p-1.5" aria-label="remover tarefa" title="remover tarefa"><Trash2 size={20}/></IconButton>
+          <IconButton onClick={() => showModal("Deletar tarefa", "Quer mesmo deletar esta tarefa?", () => deleteTodoDispatcher(todoId))} className="rounded-md max-520:p-1.5" aria-label="remover tarefa" title="remover tarefa"><Trash2 size={20}/></IconButton>
         </div>
 
         <div className={`priority-tag h-full w-2 absolute left-0 top-0 ${priorityTagColor}`}></div>
       </div>
 
-      <TodoItemContent 
+      <TodoItemContent
         isEditing={isEditing} isExpanded={isExpanded}
         todoId={todoId} todoText={todoText} todoDescription={todoDescription} todoDate={todoDate} todoPriority={todoPriority} checked={checked}
         onSubmit={handleEditTodo}
