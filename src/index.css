@@ -22,8 +22,20 @@
 }
 
 body {
+  transition: filter 200ms ease-out;
+}
+
+body.dark {
   background-image: radial-gradient(circle farthest-side, #27272a, 40%, #09090b);
   background-attachment: fixed;
+}
+
+body.light {
+  filter: invert(1);
+}
+
+.light .remove-invert-filter {
+  filter: invert(1);
 }
 
 button,

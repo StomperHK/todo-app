@@ -27,7 +27,7 @@ function ColorThemeSwitch() {
 
 export function Header() {
   return (
-    <header className=" p-4 py-3 bg-zinc-800">
+    <header className=" px-5 py-3 bg-zinc-800">
       <div className="flex justify-between items-center max-w-5xl m-auto">  {/* flex-wrapper */}
         <p className="font-rubik">TODO APP</p>
         <div className="h-fit">

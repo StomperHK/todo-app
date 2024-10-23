@@ -66,7 +66,7 @@ export function TodoItem({ todoId, todoText, todoDescription, todoDate, todoPrio
           <IconButton onClick={() => showModal("Deletar tarefa", "Quer mesmo deletar esta tarefa?", () => deleteTodoDispatcher(todoId))} className="rounded-md max-520:p-1.5" aria-label="remover tarefa" title="remover tarefa"><Trash2 size={20}/></IconButton>
         </div>
 
-        <div className={`priority-tag h-full w-2 absolute left-0 top-0 ${priorityTagColor}`}></div>
+        <div className={`remove-invert-filter priority-tag h-full w-2 absolute left-0 top-0 ${priorityTagColor}`}></div>
       </div>
 
       <TodoItemContent
