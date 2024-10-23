@@ -1,7 +1,8 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 import { IconButton } from "./IconButton"
-import { Sun, Moon } from "react-feather"
+import { Sun, Moon, Edit2 } from "react-feather"
 
 function ColorThemeSwitch() {
   const [colorTheme, setColorTheme] = useState("dark")
@@ -27,9 +28,9 @@ function ColorThemeSwitch() {
 
 export function Header() {
   return (
-    <header className=" px-5 py-3 bg-zinc-800">
+    <header className=" px-5 py-3">
       <div className="flex justify-between items-center max-w-5xl m-auto">  {/* flex-wrapper */}
-        <p className="font-rubik">TODO APP</p>
+        <Link to="/" className="flex items-center gap-2 text-white hover:text-white"><Edit2 size={20} /> TODO APP</Link>
         <div className="h-fit">
           <ColorThemeSwitch />
         </div>
