@@ -11,7 +11,7 @@ function TodosCloseToExpireListItem({ todo: { todoText, todoDate } }) {
   const {closeToExpireItem} = styles
 
   return (
-      <li className={`${closeToExpireItem} bg-zinc-700 bg-opacity-65 p-1 px-2 line-clamp-1`}>{formatDate(todoDate)} - {todoText} </li>
+      <li className={`${closeToExpireItem} bg-zinc-700 bg-opacity-65 p-1 px-2 line-clamp-1`}><time dateTime={todoDate}>{formatDate(todoDate)}</time> - {todoText} </li>
   )
 }
 
