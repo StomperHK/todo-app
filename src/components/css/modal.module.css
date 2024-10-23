@@ -1,18 +1,26 @@
-.showModal {
-  display: flex;
+.modal {
+  display: none;
 
-  animation: show-modal 500ms ease-out;
+  opacity: 0;
+
+  transition: 200ms ease-out opacity, overlay 200ms linear, display 200ms linear;
+  transition-behavior: allow-discrete;
 }
 
+.modal[open], .modal:has(>dialog[open]) {
+  display: flex;
+
+  opacity: 1;
+
+  animation: show-modal 200ms ease-out;
+}
 
 @keyframes show-modal {
   from {
-    display: flex;
     opacity: 0;
   }
 
   to {
-    display: flex;
     opacity: 1;
   }
 }

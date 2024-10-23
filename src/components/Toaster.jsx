@@ -9,9 +9,9 @@ export function Toaster({ toasterState: {isVisible, status, title}, setToasterSt
   const dialogRef = useRef(null)
   const closeToasterTimeout = useRef(null)
 
-  const {showModalClass} = styles
+  const {modal} = styles
   const isErrorStatus = status === "error"
-
+  
 
   useEffect(showToaster)
   
@@ -33,7 +33,7 @@ export function Toaster({ toasterState: {isVisible, status, title}, setToasterSt
   }
 
   return (
-    <dialog ref={dialogRef} className={`${isVisible && showModalClass} ${isErrorStatus ? "bg-red-500" : "bg-green-300 text-black" } justify-between items-center w-full p-2 px-3 fixed top-0 left-0`}>
+    <dialog ref={dialogRef} className={`${modal} ${isErrorStatus ? "bg-red-500" : "bg-green-300 text-black" } justify-between items-center w-full p-2 px-3 fixed top-0 left-0`}>
       <h2 className="text-base text-current">{title}</h2>
 
       <button onClick={closeToaster} aria-label="fechar modal de aviso" className="p-1 bg-zinc-100 bg-opacity-30 rounded">
