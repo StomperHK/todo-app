@@ -60,7 +60,7 @@ export function TodosCloseToExpireAside({ todos }) {
   const thereAreNoTodos = todos.length === 0
 
   return (  
-    <div className="mb-4 min-h-[116px] p-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
+    <div className="mb-4 min-h-[116px] p-3 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
       <h2 className="mb-2 text-2xl">Perto de Expirar</h2>
 
       {
