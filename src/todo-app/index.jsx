@@ -11,19 +11,25 @@ import { getTodosStorageMethods } from "../lib/todosStorage";
 
 
 export function Todo() {
-  const [toasterState, setToasterState] = useState({isVisible: false, text: ""})
+  const [toasterState, setToasterState] = useState({isVisible: false, status: "", text: ""})
   const [todos, dispatch] = useReducer(todosReducer, [])
 
-  let todosStorageMethods = useRef({})
+  let todosStorageMethodsRef = useRef(null)
 
   const { todoList } = styles
 
 
   useEffect(manageTodosStorage, [todos])
 
+
+  function showToaster(newStatus, newText) {
+    const stateCopy = {isVisible: true, status: newStatus, text: newText}
+
+    setToasterState(stateCopy)
+  }
   
   function manageTodosStorage() {
-    const todosHaveBeenLoaded = Object.keys(todosStorageMethods.current).length
+    const todosHaveBeenLoaded = todosStorageMethodsRef.current
 
     if (!todosHaveBeenLoaded) {
       loadTodos()
@@ -34,24 +40,23 @@ export function Todo() {
   }
 
   function loadTodos() {
-    todosStorageMethods.current = getTodosStorageMethods()
+    todosStorageMethodsRef.current = getTodosStorageMethods()
 
-    if (todosStorageMethods.current.status === "local-storage-not-supported") {
-      console.error("Error when accessing localStorage")
-      todosStorageMethods.current = {}
+    if (todosStorageMethodsRef.current.status === "local-storage-not-supported") {
+      todosStorageMethodsRef.current = null
+
+      showToaster("error", "Serviço para armazenar tarefas indisponível")
       return
     }
     
-    const todosData = todosStorageMethods.current.loadTodosData()
+    const todosData = todosStorageMethodsRef.current.loadTodosData()
     const errorOccurred = todosData && todosData.status === "parse-error"
     
-    if (todosData === null) {
-      console.log("No data to load")
-      return
-    }
+    if (todosData === null) return
     if (errorOccurred) {
-      console.log("Error when parsing todos")
-      todosStorageMethods.current = {}
+      todosStorageMethodsRef.current = null
+      
+      showToaster("error", "Erro ao analisar dados.")
       return
     }
     
@@ -59,10 +64,10 @@ export function Todo() {
   }
 
   function saveTodos() {
-    const setTodosDataResult = todosStorageMethods.current.setTodosData(todos).status
+    const setTodosDataResult = todosStorageMethodsRef.current.setTodosData(todos).status
 
     if (!setTodosDataResult === "quota-exceeded-error") {
-      console.error("No storage disponible")
+      showToaster("error", "Sem espaço para armazenar mais tarefas.")
     }
   }
 
