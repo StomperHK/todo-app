@@ -1,13 +1,11 @@
 import { Header } from "./components/Header"
-import { Todo } from "./todo-app/"
-
+import { TodoApp } from "./todo-app/"
 
 function App() {
 
   return (
     <>
-      <Header />
-      <Todo />
+      <TodoApp />
     </>
   )
 }

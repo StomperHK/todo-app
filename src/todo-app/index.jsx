@@ -1,5 +1,6 @@
 import { useState, useReducer, useEffect, useRef, useContext } from "react";
 
+import { Header } from "../components/Header";
 import { Toaster } from "../components/Toaster";
 import { Modal } from "../components/Modal";
 import { Sidebar } from "./Sidebar";
@@ -12,7 +13,7 @@ import { ModalContext } from "../lib/modalContext";
 import { getTodosStorageMethods } from "../lib/todosStorage";
 
 
-export function Todo() {
+export function TodoApp() {
   const [toasterState, setToasterState] = useState({isVisible: false, status: "", title: ""})
   const [modalState, setModalState] = useState({isVisible: false, title:"", description: "", action: null })
   const [todos, dispatch] = useReducer(todosReducer, [])
@@ -126,7 +127,9 @@ export function Todo() {
   }
 
   return (
-    <div className="min-h-[100svh] bg-peaks">   {/* backround wrapper */}
+    <>
+      <Header />
+    
       <h1 className="text-center uppercase my-5 max-520:text-3xl">Suas tarefas</h1>
 
       <ModalContext.Provider value={showModal}>
@@ -147,6 +150,6 @@ export function Todo() {
       <Toaster toasterState={toasterState} setToasterState={setToasterState} />
 
       <Modal modalState={modalState} setModalState={setModalState} />
-    </div>
+    </>
   )
 }
