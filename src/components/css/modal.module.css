@@ -1,0 +1,18 @@
+.showModal {
+  display: flex;
+
+  animation: show-modal 500ms ease-out;
+}
+
+
+@keyframes show-modal {
+  from {
+    display: flex;
+    opacity: 0;
+  }
+
+  to {
+    display: flex;
+    opacity: 1;
+  }
+}
