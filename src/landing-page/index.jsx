@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react"
+import { useEffect } from "react"
 import { Link } from "react-router-dom"
 
 import { Header } from "../components/Header"
@@ -11,13 +11,9 @@ import styles from "./css/index.module.css"
 export function LandingPage() {
   const {wavesbackground, featuresList} = styles
 
-  const windowEL = document.querySelector("body")
-
-  useEffect(showLandingPage)
+  useEffect(showLandingPage, [])
 
   function showLandingPage() {
-
-
     let transitionClasses = ".opacity-5, .-translate-x-20 .translate-x-20, .-translate-y-20"
     const hiddenSections = Array.from(document.querySelectorAll(transitionClasses))
 
