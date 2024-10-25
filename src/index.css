@@ -19,7 +19,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --header-height: 64px;
 }
+
 
 body {
   transition: filter 200ms ease-out;
@@ -34,9 +37,20 @@ body.light {
   filter: invert(1);
 }
 
+.light *::selection {
+  background-color: rgb(124, 145, 34);
+}
+
 .light .remove-invert-filter {
   filter: invert(1);
+  transition: none;
 }
+
+.full-height-minus-header {
+  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100svh - var(--header-height));
+}
+
 
 button,
 input,
