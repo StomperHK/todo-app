@@ -24,8 +24,9 @@ export function TodoApp() {
 
 
   useEffect(manageTodosStorage, [todos])
+  useEffect(showPage, [])
 
-  
+
   function manageTodosStorage() {
     const todosHaveBeenLoaded = todosStorageMethodsRef.current
 
@@ -114,38 +115,46 @@ export function TodoApp() {
     })
   }
 
-  function showToaster(newStatus, newTitle) {
-    const stateCopy = {isVisible: true, status: newStatus, title: newTitle}
+  function showPage() {
+    const hiddenSection = document.querySelector(".transition-transform-opacity")
 
-    setToasterState(stateCopy)
+    hiddenSection.classList.remove("opacity-5", "-translate-y-20")
+    
+  }
+
+  function showToaster(newStatus, newTitle) {
+    const newState = {isVisible: true, status: newStatus, title: newTitle}
+
+    setToasterState(newState)
   }
 
   function showModal(newTitle, newTodoDescription, newAction) {
-    const stateCopy = {isVisible: true, title: newTitle, description: newTodoDescription, action: newAction}
+    const newState = {isVisible: true, title: newTitle, description: newTodoDescription, action: newAction}
 
-    setModalState(stateCopy)
+    setModalState(newState)
   }
 
   return (
     <>
       <Header />
     
-      <h1 className="text-center uppercase my-5 max-520:text-3xl">Suas tarefas</h1>
-
-      <ModalContext.Provider value={showModal}>
-        <div className="flex items-start gap-4 w-fit m-auto mt-10 mb-10 -translate-x-[160px] max-1280:block max-1280:translate-x-0">
-          <Sidebar todos={todos} />
-          <main className="order-1 max-w-xl w-[90svw]  py-3 px-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
-            <h2 className="text-center  mb-3">Criar Tarefa</h2>
-            <TodoForm addTodoDispatcher={addTodoDispatcher} />
-            <ul className={`${todoList} rounded-md overflow-hidden`}>
-              {
-                todos.map((todo) => <TodoItem key={todo.todoId} {...todo} deleteTodoDispatcher={deleteTodoDispatcher} editTodoDispatcher={editTodoDispatcher} checkTodoDispatcher={checkTodoDispatcher} />)
-              }
-            </ul>
-          </main>
-        </div>
-      </ModalContext.Provider>
+      <div className="opacity-5 -translate-y-20 transition-transform-opacity delay-300 duration-500">
+        <h1 className="text-center uppercase my-5 max-520:text-3xl">Suas tarefas</h1>
+        <ModalContext.Provider value={showModal}>
+          <div className="flex items-start gap-4 w-fit m-auto mt-10 mb-10 -translate-x-[160px] max-1280:block max-1280:translate-x-0">
+            <Sidebar todos={todos} />
+            <main className="order-1 max-w-xl w-[90svw]  py-3 px-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
+              <h2 className="text-center  mb-3">Criar Tarefa</h2>
+              <TodoForm addTodoDispatcher={addTodoDispatcher} />
+              <ul className={`${todoList} rounded-md overflow-hidden`}>
+                {
+                  todos.map((todo) => <TodoItem key={todo.todoId} {...todo} deleteTodoDispatcher={deleteTodoDispatcher} editTodoDispatcher={editTodoDispatcher} checkTodoDispatcher={checkTodoDispatcher} />)
+                }
+              </ul>
+            </main>
+          </div>
+        </ModalContext.Provider>
+      </div>
 
       <Toaster toasterState={toasterState} setToasterState={setToasterState} />
 
