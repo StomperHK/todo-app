@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 
 import { IconButton } from "./IconButton"
+import { SocialLinks } from "./SocialLinks"
 import { Sun, Moon } from "react-feather"
 
 function ColorThemeSwitch() {
@@ -20,7 +21,7 @@ function ColorThemeSwitch() {
   updateColorThemeOnClass()
 
   return (
-    <IconButton className="rounded-full active:bg-zinc-500" onClick={toggleColorTheme}>
+    <IconButton onClick={toggleColorTheme} role="switch" aria-checked={colorTheme === "dark" ? "true" : "false"} aria-label="tema da página está escuro" className="rounded-full active:bg-zinc-500">
       {colorTheme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
     </IconButton>
   )
@@ -28,12 +29,14 @@ function ColorThemeSwitch() {
 
 export function Header() {
   return (
-    <header className=" px-5 py-3"> 
+    <header className="px-5 py-4">
       <div className="flex justify-between items-center max-w-5xl m-auto">  {/* flex-wrapper */}
         <Link to="/" className="flex items-center gap-2 text-white hover:text-white"> TODO APP</Link>
-        <div className="h-fit">
+        <nav className="flex gap-4">
+          <SocialLinks />
+
           <ColorThemeSwitch />
-        </div>
+        </nav>
       </div>
     </header>
   )
