@@ -1,4 +1,4 @@
-import { useState, useReducer, useEffect, useRef, useContext } from "react";
+import { useState, useReducer, useEffect, useRef } from "react";
 
 import { Header } from "../components/Header";
 import { Toaster } from "../components/Toaster";
@@ -7,6 +7,7 @@ import { Sidebar } from "./Sidebar";
 import { TodoForm } from "./TodoForm";
 import { TodoItem } from "./TodoItem";
 
+import { useLocation } from "react-router-dom";
 import styles from "./css/Todo.module.css";
 import { todosReducer } from "../lib/todosReducer";
 import { ModalContext } from "../lib/modalContext";
@@ -17,6 +18,7 @@ export function TodoApp() {
   const [toasterState, setToasterState] = useState({isVisible: false, status: "", title: ""})
   const [modalState, setModalState] = useState({isVisible: false, title:"", description: "", action: null })
   const [todos, dispatch] = useReducer(todosReducer, [])
+  const location = useLocation()
 
   let todosStorageMethodsRef = useRef(null)
 
@@ -24,7 +26,7 @@ export function TodoApp() {
 
 
   useEffect(manageTodosStorage, [todos])
-  useEffect(showPage, [])
+  useEffect(showPage, [location])
 
 
   function manageTodosStorage() {
@@ -44,7 +46,7 @@ export function TodoApp() {
     if (todosStorageMethodsRef.current.status === "local-storage-not-supported") {
       todosStorageMethodsRef.current = null
 
-      showToaster("error", "Serviço para armazenar tarefas indisponível")
+      showToaster("error", "Serviço para armazenar tarefas indisponível.")
       return
     }
     
@@ -118,7 +120,7 @@ export function TodoApp() {
   function showPage() {
     const hiddenSection = document.querySelector(".transition-transform-opacity")
 
-    hiddenSection.classList.remove("opacity-5", "-translate-y-20")
+    setTimeout(() => hiddenSection.classList.remove("opacity-5", "-translate-y-20"), 0)
     
   }
 
@@ -143,7 +145,7 @@ export function TodoApp() {
         <ModalContext.Provider value={showModal}>
           <div className="flex items-start gap-4 w-fit m-auto mt-10 mb-10 -translate-x-[160px] max-1280:block max-1280:translate-x-0">
             <Sidebar todos={todos} />
-            <main className="order-1 max-w-xl w-[90svw]  py-3 px-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
+            <main className="order-1 max-w-xl w-[90svw] py-3 px-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
               <h2 className="text-center  mb-3">Criar Tarefa</h2>
               <TodoForm addTodoDispatcher={addTodoDispatcher} />
               <ul className={`${todoList} rounded-md`}>
