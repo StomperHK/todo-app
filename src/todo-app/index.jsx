@@ -15,9 +15,9 @@ import { getTodosStorageMethods } from "../lib/todosStorage";
 
 
 export function TodoApp() {
+  const [todos, dispatch] = useReducer(todosReducer, [])
   const [toasterState, setToasterState] = useState({isVisible: false, status: "", title: ""})
   const [modalState, setModalState] = useState({isVisible: false, title:"", description: "", action: null })
-  const [todos, dispatch] = useReducer(todosReducer, [])
   const location = useLocation()
 
   let biggestId = 0
@@ -152,7 +152,7 @@ export function TodoApp() {
         <h1 className="text-center uppercase my-5 max-520:text-3xl">Suas tarefas</h1>
 
         <ModalContext.Provider value={showModal}>
-          <div className="flex items-start gap-4 w-fit m-auto mt-10 mb-10 -translate-x-[160px] max-1280:block max-1280:translate-x-0">
+          <div className="flex items-start gap-4 w-fit m-auto mt-10 mb-10 -translate-x-[150px] max-1280:block max-1280:translate-x-0">
             <Sidebar todos={todos} />
 
             <main className="order-1 max-w-xl w-[90svw] py-3 px-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">

@@ -33,10 +33,10 @@ export function Toaster({ toasterState: {isVisible, status, title}, setToasterSt
   }
 
   return (
-    <dialog ref={dialogRef} className={`${modal} ${isErrorStatus ? "bg-red-500" : "bg-green-300 text-black" } justify-between items-center w-full p-2 px-3 fixed top-0 left-0`}>
+    <dialog ref={dialogRef} autoFocus aria-describedby={title} role="alertdialog" className={`${modal} ${isErrorStatus ? "bg-red-500" : "bg-green-300 text-black" } justify-between items-center w-full p-2 px-3 fixed top-0 left-0 right-0`}>
       <h2 className="text-base text-current">{title}</h2>
 
-      <button onClick={closeToaster} aria-label="fechar modal de aviso" className="p-1 bg-zinc-100 bg-opacity-30 rounded">
+      <button onClick={closeToaster} aria-label="fechar modal de aviso" className="p-1 bg-zinc-100 bg-opacity-30 rounded focus-visible:outline-none focus-visible:bg-opacity-60 focus-visible:border-zinc-200">
         <X size={20} color="#666" />
       </button>
     </dialog>

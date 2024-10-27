@@ -45,10 +45,11 @@ function TodosCloseToExpireList({ todos }) {
       {
         amountOfTodosCloseToExpire ? 
         <div>
-          <button onClick={toggleExpandTodos} className={`${isExpanded ? "rounded-t" : "rounded"} flex shadow-normal justify-between items-center w-full p-1.5 px-2 border-2 border-zinc-600 bg-zinc-800 text-start bg-opacity-10 transition-colors active:bg-zinc-900`}>
+          <button onClick={toggleExpandTodos} aria-expanded={isExpanded ? "true" : "false"} aria-controls="list-of-todos-pending" 
+            className={`${isExpanded ? "rounded-t" : "rounded"} flex shadow-normal justify-between items-center w-full p-1.5 px-2 border-2 border-zinc-600 bg-zinc-800 text-start bg-opacity-10 transition-colors active:bg-zinc-900 focus-visible:bg-opacity-60 focus-visible:border-zinc-200 focus-visible:outline-none`}>
             {amountOfTodosCloseToExpire} tarefa(s) perto de vencer <ChevronDown size={20} className={isExpanded ? "rotate-180" : ""}/>
           </button>
-          {isExpanded && <ul className="rounded-b overflow-hidden"> {todosCloseToExpireDate.map(todo => <TodosCloseToExpireListItem key={todo.id} todo={todo}/>)} </ul>}
+          <ul id="list-of-todos-pending" className={`${isExpanded ? "block" : "hidden"} rounded-b overflow-hidden`}> {todosCloseToExpireDate.map(todo => <TodosCloseToExpireListItem key={todo.id} todo={todo}/>)} </ul>
         </div> :
         <p className="text-zinc-300 mt-3">Tudo em dia.</p>
       }
@@ -60,7 +61,7 @@ export function TodosCloseToExpireAside({ todos }) {
   const thereAreNoTodos = todos.length === 0
 
   return (  
-    <div className="mb-4 min-h-[116px] p-3 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
+    <aside aria-label="Tarefas perto de expirar" className="mb-4 min-h-[116px] p-3 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
       <h2 className="mb-2 text-2xl">Perto de Expirar</h2>
 
       {
@@ -70,6 +71,6 @@ export function TodosCloseToExpireAside({ todos }) {
         </p> :
         <TodosCloseToExpireList todos={todos} />
       }
-    </div>
+    </aside>
   )
 }

@@ -47,7 +47,7 @@ export function LandingPage() {
                 Sem login, sem recursos complexos, apenas o essencial para você ser mais produtivo. É tudo tão simples quanto essa página.
               </p>
               <div className="max-700:flex max-700:justify-center">
-                <Link to="/todo-app"><Button className="text-white border-zinc-500 bg-zinc-800">começar a usar <ArrowRight size={20} /></Button></Link>
+                <Link to="/todo-app"><Button tabindex="-1" className="text-white border-zinc-500 bg-zinc-800">começar a usar <ArrowRight size={20} /></Button></Link>
               </div>
             </figcaption>
 

@@ -14,7 +14,7 @@ export function TodoItemContent({ isEditing, isExpanded, todoId, todoText, todoD
 
   if (isExpanded) {
     return (
-      <div className="p-3 pl-5 w-full bg-zinc-700 bg-opacity-60">
+      <div id={`todo-content-${todoId}`} className="p-3 pl-5 w-full bg-zinc-700 bg-opacity-40">
         <p className={`text-start break-all`}>{todoText}</p>
 
         { (todoDescription || todoHasDate) && <hr className="border-2 border-zinc-600 mt-3" />}
@@ -26,7 +26,7 @@ export function TodoItemContent({ isEditing, isExpanded, todoId, todoText, todoD
 
   if (isEditing) {
     return (
-      <form onSubmit={onSubmit} className="flex items-start gap-4 p-3 pl-5 w-full bg-zinc-700 bg-opacity-60 max-580:flex-col max-580:items-center">
+      <form onSubmit={onSubmit} id={`todo-edit-form-${todoId}`} className="flex items-start gap-4 p-3 pl-5 w-full bg-zinc-700 bg-opacity-60 max-580:flex-col max-580:items-center">
         <div className="w-full">
           <Input type="text" defaultValue={todoText} name={"new-todo-text-" + todoId} placeholder="novo título da tarefa" className="w-full" />
           <Input textarea defaultValue={todoDescription} name={"new-todo-description-" + todoId} placeholder="nova descrição da tarefa" className="w-full mt-4 mb-4" />

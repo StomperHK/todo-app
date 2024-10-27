@@ -39,7 +39,7 @@ export function TodoForm({ startingId, addTodoDispatcher }) {
         <div className="flex items-center gap-3">
           <Input type="text" placeholder="título da tarefa" name="todo-name" className="grow" />
           
-          <IconButton type="button" onClick={handleToggleDescription} aria-label="exibir campo de descrição" title="exibir campo de descrição" className="rounded-full active:bg-zinc-600"><ChevronDown size={20} className={moreDetailtsAreVisible ? "rotate-180" : ""} /></IconButton>
+          <IconButton type="button" onClick={handleToggleDescription} aria-expanded={moreDetailtsAreVisible ? "true" : "false"} aria-controls="todo-form-more-details" aria-label="exibir campo de descrição" title="exibir campo de descrição" className="rounded-full active:bg-zinc-600"><ChevronDown size={20} className={moreDetailtsAreVisible ? "rotate-180" : ""} /></IconButton>
 
           <IconButton type="submit" aria-label="criar tarefa" title="criar tarefa" className="rounded rounded-br-lg active:bg-zinc-600 max-430:hidden"><CornerDownLeft size={28}  /></IconButton>
           <IconButton type="submit" aria-label="criar tarefa" title="criar tarefa" className="rounded rounded-br-lg hidden active:bg-zinc-600 max-430:block"><CornerDownLeft size={20}  /></IconButton>
@@ -47,7 +47,7 @@ export function TodoForm({ startingId, addTodoDispatcher }) {
 
         { 
           moreDetailtsAreVisible && (
-            <>
+            <div id="todo-form-more-details">
               <Input textarea placeholder="descrição da tarefa" name="todo-description" className="w-full my-4" />
 
               <div className="flex justify-around gap-3 max-520:flex-col">
@@ -65,7 +65,7 @@ export function TodoForm({ startingId, addTodoDispatcher }) {
                   </select>
                 </label>
               </div>
-            </>
+            </div>
           )
         }
       </form>
