@@ -11,7 +11,7 @@ export function TodoForm({ startingId, addTodoDispatcher }) {
 
   let todoId = startingId + 1
   const inputMinimalDate = getCurrentDate()
-  
+
 
   function handleToggleDescription() {
     setMoreDetailsAreVisible(state => !state)
@@ -48,17 +48,17 @@ export function TodoForm({ startingId, addTodoDispatcher }) {
         { 
           moreDetailtsAreVisible && (
             <>
-              <Input textarea placeholder="descrição da tarefa" name="todo-description" className="w-full my-5" />
+              <Input textarea placeholder="descrição da tarefa" name="todo-description" className="w-full my-4" />
 
-              <div className="flex justify-around flex-wrap gap-3">
+              <div className="flex justify-around gap-3 max-520:flex-col">
                 <label>
                   Para Quando é:<br/>
-                  <input type="date" name="todo-date" min={inputMinimalDate} aria-label="definir a data" className="mt-2 w-[160px] bg-transparent border-2 border-zinc-500 p-1 rounded outline-none transition-colors duration-150 focus:border-zinc-300" />
+                  <input type="date" name="todo-date" min={inputMinimalDate} aria-label="definir a data" className="mt-2 w-[160px] bg-transparent border-2 border-zinc-500 p-1 rounded outline-none transition-colors duration-150 focus:border-zinc-300 max-520:w-full" />
                 </label>
 
                 <label>
                   Nível de Prioridade:<br/>
-                  <select name="todo-priority" defaultValue="baixo" className="mt-2 w-[160px] p-1.5 bg-transparent border-2 rounded outline-none border-zinc-500 transition-colors duration-150 focus:border-zinc-300">
+                  <select name="todo-priority" defaultValue="baixo" className="mt-2 w-[160px] p-1.5 bg-transparent border-2 rounded outline-none border-zinc-500 transition-colors duration-150 focus:border-zinc-300 max-520:w-full">
                     <option value="alto" className="text-black">urgente</option>
                     <option value="médio" className="text-black">normal</option>
                     <option value="baixo" className="text-black">pouco importante</option>

@@ -1,13 +1,37 @@
-.tools.tools {
+.toolsPopper.toolsPopper {
   display: none;
 }
 
-.tools--open.tools--open {
-  display: flex;
+.toolsPopper--open.toolsPopper--open {
+  display: block;
+  animation: show 150ms linear;
 }
 
-@media (min-width: 430px) {
-  .tools {
-    display: flex !important;
+@keyframes hide {
+  from {
+    display: block;
+    opacity: 1;
+  }
+
+  to {
+    display: block;
+    opacity: 0;
+  }
+}
+
+@keyframes show {
+  from {
+    display: flex;
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 431px) {
+  .toolsPopper {
+    display: none !important;
   }
 }
