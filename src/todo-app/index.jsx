@@ -20,6 +20,14 @@ export function TodoApp() {
   const [todos, dispatch] = useReducer(todosReducer, [])
   const location = useLocation()
 
+  let biggestId = 0
+  const todosJSX = todos.map((todo) => {
+    biggestId = todo.todoId > biggestId ? todo.todoId : biggestId
+    
+
+    return <TodoItem key={todo.todoId} {...todo} deleteTodoDispatcher={deleteTodoDispatcher} editTodoDispatcher={editTodoDispatcher} checkTodoDispatcher={checkTodoDispatcher} />
+  })
+
   let todosStorageMethodsRef = useRef(null)
 
   const { todoList } = styles
@@ -142,20 +150,23 @@ export function TodoApp() {
     
       <div className="opacity-5 -translate-y-20 transition-transform-opacity delay-300 duration-500">
         <h1 className="text-center uppercase my-5 max-520:text-3xl">Suas tarefas</h1>
+
         <ModalContext.Provider value={showModal}>
           <div className="flex items-start gap-4 w-fit m-auto mt-10 mb-10 -translate-x-[160px] max-1280:block max-1280:translate-x-0">
             <Sidebar todos={todos} />
+
             <main className="order-1 max-w-xl w-[90svw] py-3 px-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
               <h2 className="text-center  mb-3">Criar Tarefa</h2>
-              <TodoForm addTodoDispatcher={addTodoDispatcher} />
+              <TodoForm startingId={biggestId} addTodoDispatcher={addTodoDispatcher} />
               <ul className={`${todoList} rounded-md`}>
                 {
-                  todos.map((todo) => <TodoItem key={todo.todoId} {...todo} deleteTodoDispatcher={deleteTodoDispatcher} editTodoDispatcher={editTodoDispatcher} checkTodoDispatcher={checkTodoDispatcher} />)
+                  todosJSX
                 }
               </ul>
             </main>
           </div>
         </ModalContext.Provider>
+
       </div>
 
       <Toaster toasterState={toasterState} setToasterState={setToasterState} />

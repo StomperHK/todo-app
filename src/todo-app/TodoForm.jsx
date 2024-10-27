@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { IconButton } from "../components/IconButton";
 import { Input } from "../components/Input";
@@ -6,13 +6,12 @@ import { ChevronDown, CornerDownLeft } from 'react-feather';
 import { getCurrentDate } from "../lib/getCurrentDate";
 
 
-let todoId = 0;
-
-
-export function TodoForm({ addTodoDispatcher }) {
+export function TodoForm({ startingId, addTodoDispatcher }) {
   const [moreDetailtsAreVisible, setMoreDetailsAreVisible] = useState(false)
 
+  let todoId = startingId + 1
   const inputMinimalDate = getCurrentDate()
+  
 
   function handleToggleDescription() {
     setMoreDetailsAreVisible(state => !state)
@@ -31,9 +30,9 @@ export function TodoForm({ addTodoDispatcher }) {
 
     const todoDateAsMiliseconds = todoDate ? Date.parse(todoDate) : ""
     
-    addTodoDispatcher(todoId++, todoText, todoDescription, todoDate, todoDateAsMiliseconds, todoPriority)
+    addTodoDispatcher(todoId, todoText, todoDescription, todoDate, todoDateAsMiliseconds, todoPriority)
   }
-
+  
   return (
     <>
       <form onSubmit={handleAddTodo} className="mb-5 p-3 rounded bg-zinc-900 bg-opacity-60">
