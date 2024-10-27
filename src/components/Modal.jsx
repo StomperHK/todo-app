@@ -46,8 +46,8 @@ export function Modal({ modalState: {isVisible, title, description, action}, set
         <p className="mb-4">{description}</p>
 
         <div className="flex justify-end gap-3">
-          <Button onClick={closeModal} className="py-1">cancelar</Button>
-          <Button onClick={executeActionAndCloseModal} className="py-1">excluir</Button>
+          <Button onClick={closeModal} className="py-1 bg-zinc-800">cancelar</Button>
+          <Button onClick={executeActionAndCloseModal} className="py-1 bg-zinc-800">excluir</Button>
         </div>
       </dialog>
     </div>
