@@ -66,9 +66,9 @@ export function TodoItem({ todoId, todoText, todoDescription, todoDate, todoPrio
           </IconButton>
         </label>
 
-        <IconButton onClick={toggleOpenPopper} aria-label="mostrar opções de edição" className="hidden max-520:p-1.5 max-430:block">{isPopperOpen ? <X size={20}/> : <Menu size={20}/>}</IconButton>
+        <IconButton onClick={toggleOpenPopper} aria-label="mostrar opções de edição" aria-expanded={isPopperOpen ? "true" : "false"} aria-controls={"tools-popper-" + todoId} className="hidden max-520:p-1.5 max-430:block">{isPopperOpen ? <X size={20}/> : <Menu size={20}/>}</IconButton>
 
-        <div className={`${toolsPopper} ${isPopperOpen ? styles["toolsPopper--open"] : ""} w-[150px] border-2 p-1 rounded absolute bottom-[110%] right-3 border-zinc-500 bg-zinc-700`}>
+        <div id={"tools-popper-" + todoId} className={`${toolsPopper} ${isPopperOpen ? styles["toolsPopper--open"] : ""} w-[150px] border-2 p-1 rounded absolute bottom-[110%] right-3 border-zinc-500 bg-zinc-700`}>
           <button onClick={!isEditing ? showEditForm : hideEditForm} className="flex w-full border-2 gap-2 mb-2 items-center rounded p-1 border-zinc-500 bg-zinc-600" aria-label="editar tarefa" title="editar tarefa">
             { !isEditing ? <Edit2 size={20} /> : <X size={20} /> }
             { !isEditing ? "abrir" : "fechar"   } edição
