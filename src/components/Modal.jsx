@@ -35,7 +35,7 @@ export function Modal({ modalState: {isVisible, title, description, action}, set
 
   return (
     <div className={`${modal} w-full h-full fixed top-0 left-0 bg-black bg-opacity-30`}>
-      <dialog ref={dialogRef} aria="deletar tarefa?" className="w-[400px] border-2 border-zinc-500 p-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded bg-zinc-700 max-520:w-[280px] max-520:p-3">
+      <dialog ref={dialogRef} aria-label="deletar tarefa?" className="w-[400px] border-2 border-zinc-500 p-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded bg-zinc-700 max-520:w-[280px] max-520:p-3">
         <div className="header flex justify-between items-center mb-5 pb-5 border-b-2 border-zinc-400 max-520:mb-3 max-520:pb-3">
           <h2 className="text-xl text-current">{title}</h2>
           <IconButton onClick={closeModal} sm aria-label="fechar modal de aviso" className="p-1 border-transparent bg-zinc-500 rounded active:bg-zinc-500">
