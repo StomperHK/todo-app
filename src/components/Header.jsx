@@ -1,12 +1,46 @@
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 
 import { IconButton } from "./IconButton"
 import { SocialLinks } from "./SocialLinks"
 import { Sun, Moon } from "react-feather"
 
+import { testLocalStorageAvaliability } from "../lib/testLocalStorageAvaliability"
+
 function ColorThemeSwitch() {
   const [colorTheme, setColorTheme] = useState("dark")
+  const themeHasBeenLoaded = useRef(false)
+
+
+  useEffect(manageColorTheme, [colorTheme])
+
+
+  function manageColorTheme() {
+    if (!themeHasBeenLoaded.current) {
+      loadTheme()
+    }
+    else {
+      saveTheme()
+    }
+  }
+
+  function loadTheme() {
+    const localStorageIsAvaliable = testLocalStorageAvaliability().status === "sucess"
+
+    if (localStorageIsAvaliable) {
+      const colorTheme = localStorage.getItem("color-theme")
+      themeHasBeenLoaded.current = true
+      
+      if (colorTheme) setColorTheme(colorTheme)
+      
+    }
+  }
+
+  function saveTheme() {
+    
+    localStorage.setItem("color-theme", colorTheme)
+  }
+
 
   function toggleColorTheme() {
     const newColorTheme = colorTheme === "light" ? "dark" : "light"
