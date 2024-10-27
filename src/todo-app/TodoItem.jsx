@@ -13,7 +13,7 @@ export function TodoItem({ todoId, todoText, todoDescription, todoDate, todoPrio
   const [todoItemState, setTodoItemState] = useState("normal")    // avoid state paradox/contradiction, when multiple states control the same entity
   const [isPopperOpen, setIsPopperOpen] = useState(false)
   const showModal = useContext(ModalContext)
-  const {tools} = styles
+  const {toolsPopper} = styles
 
   const isEditing = todoItemState === "editing"
   const isExpanded = todoItemState === "expanded"
@@ -66,9 +66,20 @@ export function TodoItem({ todoId, todoText, todoDescription, todoDate, todoPrio
           </IconButton>
         </label>
 
-        <IconButton onClick={toggleOpenPopper} aria-label="mostrar opções de edição" className="hidden max-520:p-1.5 max-430:block"><Menu size={20}/></IconButton>
+        <IconButton onClick={toggleOpenPopper} aria-label="mostrar opções de edição" className="hidden max-520:p-1.5 max-430:block">{isPopperOpen ? <X size={20}/> : <Menu size={20}/>}</IconButton>
 
-        <div className={`${tools} ${isPopperOpen ? styles["tools--open"] : ""} flex items-center gap-3 max-430:border-2 max-430:p-2 max-430:rounded max-430:absolute max-430:bottom-[110%] max-430:right-3 max-430:border-zinc-500 max-430:bg-zinc-700`}>
+        <div className={`${toolsPopper} ${isPopperOpen ? styles["toolsPopper--open"] : ""} w-[150px] border-2 p-1 rounded absolute bottom-[110%] right-3 border-zinc-500 bg-zinc-700`}>
+          <button onClick={!isEditing ? showEditForm : hideEditForm} className="flex w-full border-2 gap-2 mb-2 items-center rounded p-1 border-zinc-500 bg-zinc-600" aria-label="editar tarefa" title="editar tarefa">
+            { !isEditing ? <Edit2 size={20} /> : <X size={20} /> }
+            { !isEditing ? "abrir" : "fechar"   } edição
+          </button>
+          <button onClick={() => showModal("Deletar tarefa", "Quer mesmo deletar esta tarefa?", () => deleteTodoDispatcher(todoId))} className="flex w-full border-2 gap-2 items-center rounded p-1 border-zinc-500 bg-zinc-600" aria-label="remover tarefa" title="remover tarefa">
+            <Trash2 size={20}/>
+            excluir
+          </button>
+        </div>
+
+        <div className="flex items-center gap-3 max-430:hidden">
           <IconButton onClick={!isEditing ? showEditForm : hideEditForm} className="rounded max-520:p-1.5" aria-label="editar tarefa" title="editar tarefa">
             { !isEditing ? <Edit2 size={20} /> : <X size={20} /> }
           </IconButton>
