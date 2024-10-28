@@ -10,7 +10,7 @@ import styles from "./css/index.module.css"
 import progressiveSVG from "../assets/progressive.svg"
 
 export function LandingPage() {
-  const {wavesbackground, featuresList} = styles
+  const {mountainBackground, featuresList} = styles
   const location = useLocation()
 
   useEffect(showLandingPage, [location])
@@ -38,7 +38,7 @@ export function LandingPage() {
   return (
     <>
       <Header />
-      <main className={`${wavesbackground} full-height-minus-header bg-waves overflow-x-hidden`}>
+      <main className={`${mountainBackground} full-height-minus-header overflow-x-hidden`}>
         <div className="max-w-7xl m-auto">
           <figure className="flex justify-evenly gap-10 items-center min-h-[80vh] px-10 pt-16 pb-10 max-1000:flex-col max-1000:min-h-0">
             <figcaption data-js-animations="opacity-5 -translate-x-20" className="w-[40%] opacity-5 -translate-x-20 transition-transform-opacity delay-300 duration-500 max-1000:w-[100%] max-1000:max-w-[600px]">
