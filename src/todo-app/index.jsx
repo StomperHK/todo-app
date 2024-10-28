@@ -4,6 +4,7 @@ import { Header } from "../components/Header";
 import { Toaster } from "../components/Toaster";
 import { Modal } from "../components/Modal";
 import { Sidebar } from "./Sidebar";
+import { TodosOverallTools } from "./TodosOverallTools";
 import { TodoForm } from "./TodoForm";
 import { TodoItem } from "./TodoItem";
 
@@ -18,17 +19,15 @@ export function TodoApp() {
   const [todos, dispatch] = useReducer(todosReducer, [])
   const [toasterState, setToasterState] = useState({isVisible: false, status: "", title: ""})
   const [modalState, setModalState] = useState({isVisible: false, title:"", description: "", action: null })
+  let todosStorageMethodsRef = useRef(null)
   const location = useLocation()
 
   let biggestId = 0
   const todosJSX = todos.map((todo) => {
     biggestId = todo.todoId > biggestId ? todo.todoId : biggestId
-    
 
     return <TodoItem key={todo.todoId} {...todo} deleteTodoDispatcher={deleteTodoDispatcher} editTodoDispatcher={editTodoDispatcher} checkTodoDispatcher={checkTodoDispatcher} />
   })
-
-  let todosStorageMethodsRef = useRef(null)
 
   const { todoList } = styles
 
@@ -92,6 +91,12 @@ export function TodoApp() {
     })
   }
 
+  function deleteAllTodosDispatcher() {
+    dispatch({
+      type: "delete-all"
+    })
+  }
+
   function deleteTodoDispatcher(todoId) {
     dispatch({
       type: "delete",
@@ -125,6 +130,10 @@ export function TodoApp() {
     })
   }
 
+  function reorderTodosDispatcher() {
+    dispatch({type: "reorder"})
+  }
+
   function showPage() {
     const hiddenSection = document.querySelector(".transition-transform-opacity")
 
@@ -152,12 +161,15 @@ export function TodoApp() {
         <h1 className="text-center uppercase my-5 max-520:text-3xl">Suas tarefas</h1>
 
         <ModalContext.Provider value={showModal}>
-          <div className="flex items-start gap-4 w-fit m-auto mt-10 mb-10 -translate-x-[150px] max-1280:block max-1280:translate-x-0">
+          <div className="flex items-start gap-4 w-fit m-auto mt-10 mb-10 -translate-x-[140px] max-1280:block max-1280:max-w-lg max-1280:translate-x-0 max-1280:w-[90%]">
             <Sidebar todos={todos} />
 
-            <main className="order-1 max-w-xl w-[90svw] py-3 px-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal">
+            <main className="order-1 max-w-lg w-[100svw] py-3 px-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal max-1280:max-w-none max-1280:w-full max-520:relative">
               <h2 className="text-center  mb-3">Criar Tarefa</h2>
               <TodoForm startingId={biggestId} addTodoDispatcher={addTodoDispatcher} />
+
+              {Boolean(biggestId) && <TodosOverallTools deleteAllTodosDispatcher={deleteAllTodosDispatcher} reorderTodosDispatcher={reorderTodosDispatcher} />}
+
               <ul className={`${todoList} rounded-md`}>
                 {
                   todosJSX

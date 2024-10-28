@@ -10,7 +10,8 @@ export default {
         "max-700": {"max": "700px"},
         "max-580": {"max": "580px"},
         "max-520": {"max": "520px"},
-        "max-430": {"max": "430px"}
+        "max-430": {"max": "430px"}, 
+        "max-380": {max: "430px"}
       },
       spacing: {
         "1.5": "0.375rem",
