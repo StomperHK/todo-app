@@ -35,13 +35,13 @@ export function TodoForm({ startingId, addTodoDispatcher }) {
   
   return (
     <>
-      <form onSubmit={handleAddTodo} className="mb-5 p-3 rounded bg-zinc-900 bg-opacity-60">
+      <form onSubmit={handleAddTodo} className="mb-5 p-3 rounded bg-zinc-900 bg-opacity-80">
         <div className="flex items-center gap-3">
           <Input type="text" placeholder="título da tarefa" name="todo-name" className="grow" />
           
           <IconButton type="button" onClick={handleToggleDescription} aria-expanded={moreDetailtsAreVisible ? "true" : "false"} aria-controls="todo-form-more-details" aria-label="exibir campo de descrição" title="exibir campo de descrição" className="rounded-full active:bg-zinc-600"><ChevronDown size={20} className={moreDetailtsAreVisible ? "rotate-180" : ""} /></IconButton>
 
-          <IconButton type="submit" aria-label="criar tarefa" title="criar tarefa" className="rounded rounded-br-lg active:bg-zinc-600 max-430:hidden"><CornerDownLeft size={28}  /></IconButton>
+          <IconButton type="submit" aria-label="criar tarefa" title="criar tarefa" className="rounded rounded-br-lg active:bg-zinc-600 max-430:hidden"><CornerDownLeft className="w-7 h-auto"  /></IconButton>
           <IconButton type="submit" aria-label="criar tarefa" title="criar tarefa" className="rounded rounded-br-lg hidden active:bg-zinc-600 max-430:block"><CornerDownLeft size={20}  /></IconButton>
         </div>
 
