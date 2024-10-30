@@ -2,8 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-import { TodoApp } from './todo-app/index.jsx';
-import { LandingPage } from './landing-page/index.jsx';
+import { TodoApp } from './todo-app/index.jsx'
+import { LandingPage } from './landing-page/index.jsx'
 
 import './index.css'
 
@@ -11,7 +11,7 @@ import './index.css'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingPage />,
+    element: <LandingPage />
   },
   {
     path: "/todo-app",
