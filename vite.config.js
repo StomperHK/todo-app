@@ -6,6 +6,6 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [
     react(),
-    VitePWA({ registerType: 'autoUpdate', injectRegister: "inline", devOptions: {enabled: true} })
+    VitePWA({ registerType: 'autoUpdate', injectRegister: "inline", devOptions: {enabled: true}, includeAssets: ["fonts/*.ttf", "*.svg"] })
   ],
 })
