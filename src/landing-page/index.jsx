@@ -7,7 +7,7 @@ import { UserX, ThumbsUp, WifiOff, ArrowRight} from "react-feather"
 
 import { useLocation } from "react-router-dom";
 import styles from "./css/index.module.css"
-import progressiveSVG from "../assets/progressive.svg"
+import progressiveSVG from "/public/progressive.svg"
 
 export function LandingPage() {
   const {mountainBackground, featuresList} = styles
