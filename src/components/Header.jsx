@@ -100,7 +100,7 @@ function InstallPWAButton() {
   }
 
   return (
-    <IconButton ref={installButtonRef} title="instalar aplicativo" className="rounded-full active:bg-zinc-500" hidden onClick={executePWAInstallationPrompt}>
+    <IconButton ref={installButtonRef} aria-label="instalar aplciativo" title="instalar aplicativo" className="rounded-full active:bg-zinc-500" hidden onClick={executePWAInstallationPrompt}>
       <Download  size={20}/>
     </IconButton>
   )
