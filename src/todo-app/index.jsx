@@ -12,7 +12,7 @@ import { useLocation } from "react-router-dom";
 import styles from "./css/Todo.module.css";
 import { todosReducer } from "../lib/todosReducer";
 import { ModalContext } from "../lib/modalContext";
-import { getTodosStorageMethods } from "../lib/todosStorage";
+import { getTodosDatabaseAndStorageMethods } from "../lib/todosStorage";
 
 
 export function TodoApp() {
@@ -48,9 +48,9 @@ export function TodoApp() {
   }
 
   function loadTodos() {
-    todosStorageMethodsRef.current = getTodosStorageMethods()
+    todosStorageMethodsRef.current = getTodosDatabaseAndStorageMethods()
 
-    if (todosStorageMethodsRef.current.status === "local-storage-not-supported") {
+    if (todosStorageMethodsRef.current.status === "error") {
       todosStorageMethodsRef.current = null
 
       showToaster("error", "Serviço para armazenar tarefas indisponível.")
@@ -58,7 +58,7 @@ export function TodoApp() {
     }
     
     const todosData = todosStorageMethodsRef.current.loadTodosData()
-    const errorOccurred = todosData && todosData.status === "parse-error"
+    const errorOccurred = todosData && todosData.status === "error"
     
     if (todosData === null) return
     if (errorOccurred) {
@@ -74,7 +74,7 @@ export function TodoApp() {
   function saveTodos() {
     const setTodosDataResult = todosStorageMethodsRef.current.setTodosData(todos).status
 
-    if (!setTodosDataResult === "quota-exceeded-error") {
+    if (setTodosDataResult === "error") {
       showToaster("error", "Sem espaço para armazenar mais tarefas.")
     }
   }
