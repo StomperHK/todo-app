@@ -35,7 +35,7 @@ export function TodoForm({ startingId, addTodoDispatcher }) {
   
   return (
     <>
-      <form onSubmit={handleAddTodo} className="mb-5 p-3 rounded bg-zinc-900 bg-opacity-80">
+      <form onSubmit={handleAddTodo} className="mb-5 p-3 rounded bg-zinc-950/30 bg-opacity-80">
         <div className="flex items-center gap-3">
           <Input type="text" placeholder="título da tarefa" name="todo-name" className="grow" />
           
