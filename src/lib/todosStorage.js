@@ -14,7 +14,7 @@ export async function getTodosDatabaseAndStorageMethods() {
   const database = response.result
   
   if (localStorageData !== null) {
-    addTodoOnDatabase(database, localStorageData)
+    addTodosOnDatabase(database, localStorageData)
   }
   
   return {
@@ -77,6 +77,16 @@ function addTodoOnDatabase(database, todo) {
   })
 }
 
+function addTodosOnDatabase(database, todos) {
+  const transaction = database.transaction(["todos"], "readwrite")
+  const objectStore = transaction.objectStore("todos")
+
+  console.log(todos);
+  
+
+  todos.forEach(todo => objectStore.add(todo))
+}
+
 function updateTodoOnDatabase(database, todoData) {
   return new Promise((resolve, reject) => {
     const transaction = database.transaction(["todos"], "readwrite")
@@ -120,15 +130,14 @@ function createRequestHandlers(request, resolve, reject, type=null) {
   }
 }
 
-
-
-function loadTodosFromLocalStorage() {    // load all data that is saved in local storage and deletes it afterwards, this way the user wont loose data that was saved before the app was updated to use indexedDB
+function loadTodosFromLocalStorage() {    // load all data that is saved in local storage and deletes it afterwards, this way the user wont loose data that was saved before the app was updated to use IndexedDB
   try {
-    const localStorageIsAvaliable = testLocalStorageAvaliability().status === "sucess"
+    const localStorageIsAvaliable = testLocalStorageAvaliability().status === "success"
 
     if (!localStorageIsAvaliable) return
 
     const todosData = localStorage.getItem(TODOS_STORAGE_KEY)
+    
     localStorage.removeItem(TODOS_STORAGE_KEY)
     return JSON.parse(todosData)
   }
