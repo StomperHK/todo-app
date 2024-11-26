@@ -5,14 +5,14 @@ import { Checkbox } from "../components/Checkbox";
 import { TodoItemContent } from "./TodoItemContent";
 import { Trash2, Edit2, X, ChevronDown, Menu } from 'react-feather';
 
-import { ModalContext } from "../lib/modalContext";
+import { ModalAndToasterContext } from "../lib/modalAndToasterContext";
 import styles from "./css/TodoItem.module.css"
 
 
 export function TodoItem({ todoId, todoText, todoDescription, todoDate, todoPriority, checked, deleteTodoDispatcher, editTodoDispatcher, checkTodoDispatcher }) {
   const [todoItemState, setTodoItemState] = useState("normal")    // avoid state paradox/contradiction, when multiple states control the same entity
   const [isPopperOpen, setIsPopperOpen] = useState(false)
-  const showModal = useContext(ModalContext)
+  const {showModal} = useContext(ModalAndToasterContext)
   const {toolsPopper} = styles
 
   const isEditing = todoItemState === "editing"

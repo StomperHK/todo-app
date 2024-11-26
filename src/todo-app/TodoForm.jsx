@@ -1,23 +1,27 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useContext } from "react";
 
 import { IconButton } from "../components/IconButton";
 import { Input } from "../components/Input";
 import { ChevronDown, CornerDownLeft } from 'react-feather';
 import { getCurrentDate } from "../lib/getCurrentDate";
 
+import { ModalAndToasterContext } from "../lib/modalAndToasterContext"
+import { TodosStorageMethodsContext } from "../lib/todosStorageMethodsContext"
+
 
 export function TodoForm({ startingId, addTodoDispatcher }) {
   const [moreDetailtsAreVisible, setMoreDetailsAreVisible] = useState(false)
+  const { showToaster } = useContext(ModalAndToasterContext)
+  const todosStorageMethods = useContext(TodosStorageMethodsContext)
 
   let todoId = startingId + 1
   const inputMinimalDate = getCurrentDate()
-
 
   function handleToggleDescription() {
     setMoreDetailsAreVisible(state => !state)
   }
 
-  function handleAddTodo(event) {
+  async function handleAddTodo(event) {
     event.preventDefault()
 
     const todoFormData = new FormData(event.target)
@@ -29,6 +33,15 @@ export function TodoForm({ startingId, addTodoDispatcher }) {
     if (!todoText) return
 
     const todoDateAsMiliseconds = todoDate ? Date.parse(todoDate) : ""
+    const todoData = {todoId, todoText, todoDescription, todoDate, todoDateAsMiliseconds, todoPriority}
+
+    const response = await todosStorageMethods.addTodoOnDatabase(todosStorageMethods.database, todoData)
+    
+
+    if (response.status === "error") {
+      showToaster("error", "Não foi possível adicionar a tarefa.")
+      return
+    }
     
     addTodoDispatcher(todoId, todoText, todoDescription, todoDate, todoDateAsMiliseconds, todoPriority)
   }

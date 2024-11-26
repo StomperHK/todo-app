@@ -4,11 +4,11 @@ import { Button } from "../components/Button"
 import { IconButton } from "../components/IconButton"
 import { Filter, AlertCircle, AlertTriangle } from "react-feather"
 
-import { ModalContext } from "../lib/modalContext"
+import { ModalAndToasterContext } from "../lib/modalAndToasterContext"
 
 
 export function TodosOverallTools({ deleteAllTodosDispatcher, reorderTodosDispatcher }) {
-  const showModal = useContext(ModalContext)
+  const {showModal} = useContext(ModalAndToasterContext)
 
   return (
     <section className="flex justify-between items-center mb-5 max-520:justify-end" role="toolbar">
