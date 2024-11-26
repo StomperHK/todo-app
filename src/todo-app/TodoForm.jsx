@@ -33,10 +33,8 @@ export function TodoForm({ startingId, addTodoDispatcher }) {
     if (!todoText) return
 
     const todoDateAsMiliseconds = todoDate ? Date.parse(todoDate) : ""
-    const todoData = {todoId, todoText, todoDescription, todoDate, todoDateAsMiliseconds, todoPriority}
-
+    const todoData = {todoText, todoDescription, todoDate, todoDateAsMiliseconds, todoPriority}
     const response = await todosStorageMethods.addTodoOnDatabase(todosStorageMethods.database, todoData)
-    
 
     if (response.status === "error") {
       showToaster("error", "Não foi possível adicionar a tarefa.")

@@ -22,7 +22,8 @@ export async function getTodosDatabaseAndStorageMethods() {
     loadTodosFromDatabase,
     addTodoOnDatabase,
     updateTodoOnDatabase,
-    deleteTodoOnDatabase
+    deleteTodoOnDatabase,
+    deleteAllTodosOnDatabase
   }
 }
 
@@ -76,12 +77,12 @@ function addTodoOnDatabase(database, todo) {
   })
 }
 
-function updateTodoOnDatabase(database, todoId, todoData) {
+function updateTodoOnDatabase(database, todoData) {
   return new Promise((resolve, reject) => {
     const transaction = database.transaction(["todos"], "readwrite")
 
     const objectStore = transaction.objectStore("todos")
-    const request = objectStore.get(todoData, todoId)
+    const request = objectStore.put(todoData)
 
     return createRequestHandlers(request, resolve, reject)
   })
@@ -93,6 +94,17 @@ function deleteTodoOnDatabase(database, todoId) {
 
     const objectStore = transaction.objectStore("todos")
     const request = objectStore.delete(todoId)
+
+    return createRequestHandlers(request, resolve, reject)
+  })
+}
+
+function deleteAllTodosOnDatabase(database) {
+  return new Promise((resolve, reject) => {
+    const transaction = database.transaction(["todos"], "readwrite")
+
+    const objectStore = transaction.objectStore("todos")
+    const request = objectStore.clear()
 
     return createRequestHandlers(request, resolve, reject)
   })
