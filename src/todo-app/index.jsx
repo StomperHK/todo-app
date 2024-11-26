@@ -11,8 +11,9 @@ import { TodoItem } from "./TodoItem";
 import { useLocation } from "react-router-dom";
 import styles from "./css/Todo.module.css";
 import { todosReducer } from "../lib/todosReducer";
-import { ModalContext } from "../lib/modalContext";
-import { getTodosStorageMethods } from "../lib/todosStorage";
+import { ModalAndToasterContext } from "../lib/modalAndToasterContext";
+import { TodosStorageMethodsContext } from "../lib/todosStorageMethodsContext";
+import { getTodosDatabaseAndStorageMethods } from "../lib/todosStorage";
 
 
 export function TodoApp() {
@@ -32,35 +33,34 @@ export function TodoApp() {
   const { todoList } = styles
 
 
-  useEffect(manageTodosStorage, [todos])
+  useEffect(manageTodosStorage, [])
   useEffect(showPage, [location])
 
 
   function manageTodosStorage() {
-    const todosHaveBeenLoaded = todosStorageMethodsRef.current
+    const todosHaveBeenLoaded = todosStorageMethodsRef.current !== null
 
     if (!todosHaveBeenLoaded) {
       loadTodos()
     }
-    else {
-      saveTodos()
-    }
   }
-
-  function loadTodos() {
-    todosStorageMethodsRef.current = getTodosStorageMethods()
-
-    if (todosStorageMethodsRef.current.status === "local-storage-not-supported") {
+  
+  async function loadTodos() {
+    todosStorageMethodsRef.current = await getTodosDatabaseAndStorageMethods()
+    
+    if (todosStorageMethodsRef.current.status === "error") {
       todosStorageMethodsRef.current = null
 
       showToaster("error", "Serviço para armazenar tarefas indisponível.")
       return
     }
     
-    const todosData = todosStorageMethodsRef.current.loadTodosData()
-    const errorOccurred = todosData && todosData.status === "parse-error"
+    const database = todosStorageMethodsRef.current.database
     
-    if (todosData === null) return
+    const response = await todosStorageMethodsRef.current.loadTodosFromDatabase(database)
+    const errorOccurred = response.status === "error"
+    const todos = response.result
+    
     if (errorOccurred) {
       todosStorageMethodsRef.current = null
       
@@ -68,15 +68,7 @@ export function TodoApp() {
       return
     }
     
-    loadTodosDispatcher(todosData)
-  }
-
-  function saveTodos() {
-    const setTodosDataResult = todosStorageMethodsRef.current.setTodosData(todos).status
-
-    if (!setTodosDataResult === "quota-exceeded-error") {
-      showToaster("error", "Sem espaço para armazenar mais tarefas.")
-    }
+    loadTodosDispatcher(todos)
   }
 
   function addTodoDispatcher(todoId, todoText, todoDescription, todoDate, todoDateAsMiliseconds, todoPriority) {
@@ -160,24 +152,27 @@ export function TodoApp() {
       <div className="opacity-5 -translate-y-20 transition-transform-opacity delay-300 duration-500">
         <h1 className="text-center uppercase my-5 max-520:text-3xl">Suas tarefas</h1>
 
-        <ModalContext.Provider value={showModal}>
+        <ModalAndToasterContext.Provider value={{showModal, showToaster}}>
           <div className="flex items-start gap-4 w-fit m-auto mt-10 mb-10 -translate-x-[140px] max-1280:block max-1280:max-w-lg max-1280:translate-x-0 max-1280:w-[90%]">
             <Sidebar todos={todos} />
 
             <main className="order-1 max-w-lg w-[100svw] py-3 px-4 border-2 border-zinc-500 rounded-md bg-zinc-800 shadow-normal max-1280:max-w-none max-1280:w-full max-520:relative">
               <h2 className="text-center  mb-3">Criar Tarefa</h2>
-              <TodoForm startingId={biggestId} addTodoDispatcher={addTodoDispatcher} />
 
-              {Boolean(biggestId) && <TodosOverallTools deleteAllTodosDispatcher={deleteAllTodosDispatcher} reorderTodosDispatcher={reorderTodosDispatcher} />}
+              <TodosStorageMethodsContext.Provider value={todosStorageMethodsRef.current}>
+                <TodoForm startingId={biggestId} addTodoDispatcher={addTodoDispatcher} />
+                {Boolean(biggestId) && <TodosOverallTools deleteAllTodosDispatcher={deleteAllTodosDispatcher} reorderTodosDispatcher={reorderTodosDispatcher} />}
+                <ul className={`${todoList} rounded-md`}>
+                  {
+                    todosJSX
+                  }
+                </ul>
+                
+              </TodosStorageMethodsContext.Provider>
 
-              <ul className={`${todoList} rounded-md`}>
-                {
-                  todosJSX
-                }
-              </ul>
             </main>
           </div>
-        </ModalContext.Provider>
+        </ModalAndToasterContext.Provider>
 
       </div>
 

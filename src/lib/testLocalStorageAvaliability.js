@@ -8,8 +8,8 @@ export function testLocalStorageAvaliability() {
     localStorage.removeItem(testKey);
   }
   catch(e) {
-    return {status: "local-storage-not-supported"}
+    return {status: "error"}
   }
 
-  return {status: "sucess"}
+  return {status: "success"}
 }

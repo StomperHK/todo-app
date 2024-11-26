@@ -49,7 +49,7 @@ function TodosCloseToExpireList({ todos }) {
             className={`${isExpanded ? "rounded-t" : "rounded"} flex shadow-normal justify-between items-center w-full p-1.5 px-2 border-2 border-zinc-600 bg-zinc-800 text-start bg-opacity-10 transition-colors active:bg-zinc-900 focus-visible:bg-opacity-60 focus-visible:border-zinc-200 focus-visible:outline-none`}>
             {amountOfTodosCloseToExpire} tarefa(s) perto de vencer <ChevronDown size={20} className={isExpanded ? "rotate-180" : ""}/>
           </button>
-          <ul id="list-of-todos-pending" className={`${isExpanded ? "block" : "hidden"} rounded-b overflow-hidden`}> {todosCloseToExpireDate.map(todo => <TodosCloseToExpireListItem key={todo.id} todo={todo}/>)} </ul>
+          <ul id="list-of-todos-pending" className={`${isExpanded ? "block" : "hidden"} rounded-b overflow-hidden`}> {todosCloseToExpireDate.map(todo => <TodosCloseToExpireListItem key={todo.todoId} todo={todo}/>)} </ul>
         </div> :
         <p className="text-zinc-300 mt-3">Tudo em dia.</p>
       }

@@ -4,11 +4,12 @@ import { Button } from "../components/Button"
 import { IconButton } from "../components/IconButton"
 import { Filter, AlertCircle, AlertTriangle } from "react-feather"
 
-import { ModalContext } from "../lib/modalContext"
+import { ModalAndToasterContext } from "../lib/modalAndToasterContext"
+import { TodosStorageMethodsContext } from "../lib/todosStorageMethodsContext"
 
 
 export function TodosOverallTools({ deleteAllTodosDispatcher, reorderTodosDispatcher }) {
-  const showModal = useContext(ModalContext)
+  const {showModal} = useContext(ModalAndToasterContext)
 
   return (
     <section className="flex justify-between items-center mb-5 max-520:justify-end" role="toolbar">
@@ -39,7 +40,20 @@ function PrioritiesTooltip() {
 }
 
 function DeleteAllTodos({ showModal, deleteAllTodosDispatcher }) {
-  return <Button onClick={() => showModal(`Deletar tudo?`, "Quer mesmo deletar TODAS tarefas?", deleteAllTodosDispatcher)} className="text-sm py-1">resetar <AlertTriangle /></Button>
+  const todosStorageMethods = useContext(TodosStorageMethodsContext)
+
+  async function deleteAllTodos() {
+    const response = await todosStorageMethods.deleteAllTodosOnDatabase(todosStorageMethods.database)
+    
+    if (response.status === "error") {
+      showToaster("error", "Não foi possível deletar todas as tarefas.")
+      return
+    }
+
+    deleteAllTodosDispatcher()
+  }
+
+  return <Button onClick={() => showModal(`Deletar tudo?`, "Quer mesmo deletar TODAS tarefas?", deleteAllTodos)} className="text-sm py-1">resetar <AlertTriangle /></Button>
 }
 
 function ReorderTodos({ reorderTodosDispatcher}) {
