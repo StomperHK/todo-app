@@ -4,14 +4,10 @@ import { ChevronDown } from "react-feather";
 
 import { formatDate } from "../lib/formatDate";
 
-
-import styles from "./css/TodosCloseToExpireAside.module.css"
-
 function TodosCloseToExpireListItem({ todo: { todoText, todoDate } }) {
-  const {closeToExpireItem} = styles
 
   return (
-      <li className={`${closeToExpireItem} bg-zinc-700 bg-opacity-65 p-1 px-2 line-clamp-1`}><time dateTime={todoDate}>{formatDate(todoDate)}</time> - {todoText} </li>
+      <li className={`border-t-2 border-zinc-700 bg-zinc-700 bg-opacity-65 p-1 px-2 line-clamp-1 first:border-none`}><time dateTime={todoDate}>{formatDate(todoDate)}</time> - {todoText} </li>
   )
 }
 
