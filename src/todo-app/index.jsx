@@ -9,7 +9,6 @@ import { TodoForm } from "./TodoForm";
 import { TodoItem } from "./TodoItem";
 
 import { useLocation } from "react-router-dom";
-import styles from "./css/Todo.module.css";
 import { todosReducer } from "../lib/todosReducer";
 import { ModalAndToasterContext } from "../lib/modalAndToasterContext";
 import { TodosStorageMethodsContext } from "../lib/todosStorageMethodsContext";
@@ -29,8 +28,6 @@ export function TodoApp() {
 
     return <TodoItem key={todo.todoId} {...todo} deleteTodoDispatcher={deleteTodoDispatcher} editTodoDispatcher={editTodoDispatcher} checkTodoDispatcher={checkTodoDispatcher} />
   })
-
-  const { todoList } = styles
 
 
   useEffect(manageTodosStorage, [])
@@ -162,7 +159,7 @@ export function TodoApp() {
               <TodosStorageMethodsContext.Provider value={todosStorageMethodsRef.current}>
                 <TodoForm startingId={biggestId} addTodoDispatcher={addTodoDispatcher} />
                 {Boolean(biggestId) && <TodosOverallTools deleteAllTodosDispatcher={deleteAllTodosDispatcher} reorderTodosDispatcher={reorderTodosDispatcher} />}
-                <ul className={`${todoList} rounded-md`}>
+                <ul className={`*:border-t-2 *:border-zinc-600 first:*:border-none rounded-md`}>
                   {
                     todosJSX
                   }
